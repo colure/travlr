@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -5,6 +7,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const hbs = require('hbs');
 require('./app_api/models/db');
+const passport = require('passport');
+
+require('./app_api/config/passport')
 
 var indexRouter = require('./app_server/routes/index');
 var usersRouter = require('./app_server/routes/users');
@@ -33,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //allow CORS
 app.use('/api', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   next();
 });
