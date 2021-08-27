@@ -10,7 +10,7 @@ import { User } from '../models/user';
 export class TripDataService {
 
   constructor(private http: HttpClient,
-    @Inject(BROWSER_STORAGE) private storage: Storage
+    @Inject(BROWSER_STORAGE) private storage: Storage //injects so we can use in the class
     ) { }
 
   private apiBaseUrl = 'http://localhost:3000/api/';
@@ -61,7 +61,7 @@ export class TripDataService {
     return this.http
       .post(url, user)
       .toPromise()
-      .then(response=>response.json() as AuthResponse)
+      .then(response => response.json() as AuthResponse)
       .catch(this.handleError);
   }
 }
